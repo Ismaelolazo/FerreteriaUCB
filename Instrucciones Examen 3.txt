@@ -1,0 +1,15 @@
+Link GitHub
+https://github.com/Ismaelolazo/FerreteriaUCB/tree/main
+Link Drive (videos y carpeta php)
+https://drive.google.com/drive/folders/1TonYu29cVeQGgu8Rm2ZyzbP2jmBrUrQY?usp=sharing
+
+
+Requerimientos
+1. Al descargar el proyecto instalar el enviorement 
+   npm install   
+   npm install -g @angular/cli
+   npm start
+2. Descargar carpeta con php del drive y Montarla en la carpeta de xampp, asegurarse que el servidor
+esta montado en otro puerto(evitar el 4200 que es el localhost default para el proyecto angular) 
+3. Contar con un navegador y conexion a internet
+4. enjoy!!
