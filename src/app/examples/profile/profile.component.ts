@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as Rellax from 'rellax';
+import {InveServiceService} from './inve-service.service'; 
+import {NgForm} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +17,15 @@ export class ProfileComponent implements OnInit {
     data : Date = new Date();
     focus;
     focus1;
+  titulo = 'Inventario dashboard';
+  items = null;
+  item = {
+    id_item: null,
+    nombre: null,
+    precio: null
+  }
 
-    constructor() { }
+    constructor(private InveServiceService: InveServiceService) { }
 
     ngOnInit() {
       var rellaxHeader = new Rellax('.rellax-header');
@@ -24,12 +34,50 @@ export class ProfileComponent implements OnInit {
         body.classList.add('profile-page');
         var navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.add('navbar-transparent');
+        
     }
     ngOnDestroy(){
         var body = document.getElementsByTagName('body')[0];
         body.classList.remove('profile-page');
         var navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.remove('navbar-transparent');
+    }
+    hayRegistros(){
+      return true;
+    }
+    MostrarTodos() {
+      this.InveServiceService.mostrarTodos().subscribe(result => this.items = result);
+    }
+    Agregar(){
+      this.InveServiceService.agregar(this.item).subscribe(datos =>{
+        if(datos['resultado'] === 'OK') {
+          alert(datos['mensaje']);
+          this.MostrarTodos();
+        }
+        
+      });
+    }
+    Eliminar(id_item){
+      this.InveServiceService.eliminar(id_item).subscribe(datos =>{
+        if(datos['resultado'] === 'OK') {
+          alert(datos['mensaje']);
+          this.MostrarTodos();
+        }
+      });
+    }
+    Modificar(){
+      console.log("se presiono modificar");
+      this.InveServiceService.update(this.item).subscribe(datos =>{
+        if(datos['resultado'] === 'OK') {
+          alert(datos['mensaje']);
+          this.MostrarTodos();
+        }
+        
+      });
+    }
+    Seleccionar(id_item){
+      this.InveServiceService.seleccionar(id_item).subscribe(datos =>
+       this.item = datos[0]);
     }
 
 }
