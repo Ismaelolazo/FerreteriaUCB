@@ -9,6 +9,9 @@ import { ExamplesModule } from './examples/examples.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginServiceService } from './examples/login/login-service.service';
+
 
 @NgModule({
     declarations: [
@@ -22,9 +25,12 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
-        ExamplesModule
+        ExamplesModule,
+        HttpClientModule
     ],
-    providers: [],
+    providers: [
+        LoginServiceService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
